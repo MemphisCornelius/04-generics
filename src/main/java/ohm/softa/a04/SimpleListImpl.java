@@ -47,21 +47,6 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 	}
 
 	/**
-	 * Get a new SimpleList instance with all items of this list which match the given filter
-	 * @param filter SimpleFilter instance
-	 * @return new SimpleList instance
-	 */
-	public SimpleList<T> filter(SimpleFilter<T> filter){
-		SimpleList<T> result = new SimpleListImpl<>();
-		for(T o : this){
-			if(filter.include(o)){
-				result.add(o);
-			}
-		}
-		return result;
-	}
-
-	/**
 	 * @inheritDoc
 	 */
 	@Override

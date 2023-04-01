@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -66,9 +68,20 @@ public class SimpleListTests {
 	@Test
 	void testFilterLambda(){
 		logger.info("Testing the filter possibilities by filtering for all elements which are dividable by 2");
-		SimpleList<Integer> result = testList.filter(o -> ( o) % 2 == 0);
+		SimpleList<Integer> result = testList.filter(o ->  o % 2 == 0);
 		for(int i : result){
 			assertTrue(i % 2 == 0);
+		}
+	}
+
+	@Test
+	void testMap() {
+		logger.info("Testing default map method by mapping every value to if it is devisible by two");
+		SimpleList<Boolean> result = testList.map(i -> i % 2 == 0);
+		Iterator<Integer> origIt = testList.iterator();
+		Iterator<Boolean> mapIt = result.iterator();
+		while (origIt.hasNext() && mapIt.hasNext()) {
+			assertEquals(origIt.next() % 2 == 0, mapIt.next());
 		}
 	}
 }
