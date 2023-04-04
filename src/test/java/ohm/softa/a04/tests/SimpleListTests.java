@@ -1,5 +1,6 @@
 package ohm.softa.a04.tests;
 
+import ohm.softa.a04.CollectionUtility;
 import ohm.softa.a04.SimpleFilter;
 import ohm.softa.a04.SimpleList;
 import ohm.softa.a04.SimpleListImpl;
@@ -10,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Peter Kurfer
@@ -26,11 +26,11 @@ public class SimpleListTests {
 	void setup(){
 		testList = new SimpleListImpl<>();
 
-		testList.add(1);
-		testList.add(2);
-		testList.add(3);
-		testList.add(4);
 		testList.add(5);
+		testList.add(3);
+		testList.add(2);
+		testList.add(4);
+		testList.add(1);
 	}
 
 	@Test
@@ -83,5 +83,26 @@ public class SimpleListTests {
 		while (origIt.hasNext() && mapIt.hasNext()) {
 			assertEquals(origIt.next() % 2 == 0, mapIt.next());
 		}
+	}
+
+	@Test
+	void testSort() {
+		logger.info("Testing sort");
+		boolean sorted = true;
+		SimpleList<Integer> result = CollectionUtility.sort(testList, Integer::compareTo);
+
+		Iterator<Integer> iterator = result.iterator();
+		int current = iterator.next();
+
+		while(iterator.hasNext()) {
+			int next = iterator.next();
+			if (current > next) {
+				sorted = false;
+				break;
+			}
+			current = next;
+		}
+
+		assertTrue(sorted);
 	}
 }

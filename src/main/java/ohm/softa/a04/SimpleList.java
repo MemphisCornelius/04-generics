@@ -1,5 +1,6 @@
 package ohm.softa.a04;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 public interface SimpleList<T> extends Iterable<T> {
@@ -8,7 +9,7 @@ public interface SimpleList<T> extends Iterable<T> {
 	 */
 	void add(T o);
 
-	void addDefault(Class<T> c) throws InstantiationException, IllegalAccessException;
+	void addDefault(Class<T> c) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
 	/**
 	 * @return current size of the list

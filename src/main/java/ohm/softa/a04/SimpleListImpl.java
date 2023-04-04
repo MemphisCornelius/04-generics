@@ -1,5 +1,6 @@
 package ohm.softa.a04;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 
 /**
@@ -35,8 +36,8 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 	}
 
 	@Override
-	public void addDefault(Class<T> c) throws InstantiationException, IllegalAccessException {
-		add(c.newInstance());
+	public void addDefault(Class<T> c) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+		add(c.getDeclaredConstructor().newInstance());
 	}
 
 	/**
